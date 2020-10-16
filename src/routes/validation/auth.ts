@@ -20,14 +20,13 @@ type FailResponse = {
 };
 /**
  * @api {get} /isLoggedIn
- * @apiName GetQuestions
- * @apiGroup Question
+ * @apiName isLoggedIn
+ * @apiGroup Validation/Auth
  *
- * @apiParam {String} roomNumber 유일한 방 번호
+ * @apiHeader authorization
  *
- * @apiSuccess {Boolean} success API 호출 성공 여부
+ * @apiSuccess {Boolean} success token 유효 여부
  * @apiSuccess {String} message 응답 메시지
- * @apiSuccess {Object} data 해당 방의 질문 리스트
  */
 router.get("/isLoggedIn", async function (req: Request, res: Response) {
   try {
