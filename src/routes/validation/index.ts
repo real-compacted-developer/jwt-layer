@@ -1,8 +1,8 @@
-import { Router } from "express";
-import authAPI from "./auth";
+import { Router } from 'express';
+import authAPI from './auth';
 
 const router = Router();
 
-router.use("/auth", authAPI);
+router.use('/auth', authAPI);
 
 export default router;

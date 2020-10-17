@@ -1,8 +1,8 @@
-import { Router } from "express";
-import validationAPI from "./validation";
+import { Router } from 'express';
+import validationAPI from './validation';
 
 const router = Router();
 
-router.use("/", validationAPI);
+router.use('/', validationAPI);
 
 export default router;
