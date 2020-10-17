@@ -19,6 +19,7 @@ type FailResponse = {
   success: false;
   message: string;
 };
+
 /**
  * @api {get} /isLoggedIn
  * @apiName isLoggedIn
@@ -37,6 +38,7 @@ router.get('/isLoggedIn', async (req: Request, res: Response) => {
      * (단, Request를 할 때는 반드시 Authorization을 header에 담아서 요청해야 한다.)
      */
     let { authorization }: any = req.headers;
+
     // 토큰이 헤더에 없는 경우
     if (!authorization) {
       const responseJSON: FailResponse = {
@@ -44,31 +46,23 @@ router.get('/isLoggedIn', async (req: Request, res: Response) => {
         message: ERROR_CODE.EMPTY_TOKEN
       };
       res.status(404).send(responseJSON);
-    }
-    // 토큰이 헤더에 있는 경우
-    else {
-      // Access Token이 Bearer로 시작하는 경우
-      if (authorization.startsWith('Bearer ')) {
-        authorization = authorization.slice(7, authorization.length);
-
-        // 만든 jwt 모듈 사용하여 토큰 확인
-        const user = await jsonwebtoken.verify(authorization);
-        req.decoded = user;
-        const responseJSON: SuccessResponse = {
-          success: true,
-          message: '당신은 로그인 유저입니다.'
-        };
-        res.status(200).send(responseJSON);
-      }
-      // Access Token이 Bearer로 시작하지 않는 경우
-      else {
-        console.log('Bearer 에러');
-        const responseJSON: FailResponse = {
-          success: false,
-          message: ERROR_CODE.INVALID_TOKEN
-        };
-        res.status(404).send(responseJSON);
-      }
+    } else if (authorization.startsWith('Bearer ')) { // Access Token이 Bearer로 시작하는 경우
+      authorization = authorization.slice(7, authorization.length);
+      // 만든 jwt 모듈 사용하여 토큰 확인
+      const user = await jsonwebtoken.verify(authorization);
+      req.decoded = user;
+      const responseJSON: SuccessResponse = {
+        success: true,
+        message: '당신은 로그인 유저입니다.'
+      };
+      res.status(200).send(responseJSON);
+    } else { // Access Token이 Bearer로 시작하지 않는 경우
+      console.log('Bearer 에러');
+      const responseJSON: FailResponse = {
+        success: false,
+        message: ERROR_CODE.INVALID_TOKEN
+      };
+      res.status(404).send(responseJSON);
     }
   } catch (err) {
     // console.log('verify에서 throw한 err를 받음');
