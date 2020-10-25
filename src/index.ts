@@ -13,7 +13,7 @@ log4js.configure({
     },
     default: {
       type: 'file',
-      filename: 'logs/sinamon.log',
+      filename: 'logs/validation.log',
       pattern: '-yyyy-MM-dd',
       compress: true
     }
