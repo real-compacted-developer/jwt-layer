@@ -17,7 +17,7 @@ const jsonwebtoken = {
     };
     return result;
   },
-  verify: (token: any) => {
+  verify: (token: any) : any => {
     /**
        * verify 함수 : JWT 토큰을 해독하는 함수
        * 첫 번째 인자(token) : 해독할 JWT 토큰
