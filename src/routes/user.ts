@@ -22,7 +22,7 @@ type Decode = {
   isPremium: boolean,
   iat: number,
   exp: number,
-  iss: 'string'
+  iss: string
 }
 /**
  * @api {get} /
