@@ -55,7 +55,7 @@ router.get('/', async (req: Request, res: Response, next : NextFunction) => {
   try {
     // Verify token
     const decoded : Decode = await jwt.verify(token);
-    const user = await axios.get(`http://db.api.connectclass.io/user/${decoded.id}`);
+    const user = await axios.get(`https://db.connectclass.io/user/${decoded.id}`);
     const responseJSON: SuccessResponse = {
       success: true,
       data: user.data.data
